@@ -27,6 +27,14 @@ spec:
           periodSeconds: 100
           successThreshold: 1
           timeoutSeconds: 1
+        livenessProbe:
+          httpGet:
+              path: /healthcheck.html
+              port: 80
+              scheme: HTTP
+          periodSeconds: 100
+          successThreshold: 1
+          timeoutSeconds: 1
         resources:
           limits:
             cpu: 200m

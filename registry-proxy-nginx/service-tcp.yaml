@@ -20,27 +20,9 @@ kind: Ingress
 metadata:
   name: gar-proxy-ingress
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: gar-proxy-service
-            port:
-              number: 80
----
-apiVersion: cloud.google.com/v1
-kind: BackendConfig
-metadata:
-  name: gar-proxy-hc-config
-spec:
-  healthCheck:
-    checkIntervalSec: 30
-    port: 80
-    type: HTTP
-    requestPath: /healthcheck.html
+  backend:
+    serviceName: gar-proxy-service
+    servicePort: 80
 ---
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
