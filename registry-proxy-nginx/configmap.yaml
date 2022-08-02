@@ -1,0 +1,7 @@
+  apiVersion: v1
+  data:
+    healthcheck.html: |-
+      <h1>OK</h1>
+  kind: ConfigMap
+  metadata:
+    name: healthcheck

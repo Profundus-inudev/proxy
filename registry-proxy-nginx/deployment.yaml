@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gar-proxy
+  labels:
+    app: gar
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gar
+  template:
+    metadata:
+      labels:
+        app: gar
+    spec:
+      containers:
+      - image: nginx:alpine
+        name: nginx
+        readinessProbe:
+          httpGet:
+            path: /healthcheck.html
+            port: 80
+            scheme: HTTP
+          periodSeconds: 100
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 200m
+            memory: 300Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        volumeMounts:
+        - mountPath: /etc/nginx/conf.d/
+          name: nginx-config
+        - mountPath: /var/www/html
+          name: healthcheck
+      volumes:
+      - name: nginx-config
+        secret:
+          secretName: gar-nginx-config
+      - configMap:
+          name: healthcheck
+        name: healthcheck

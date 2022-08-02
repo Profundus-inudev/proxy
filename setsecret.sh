@@ -1,0 +1,1 @@
+kubectl create secret generic gar-nginx-config --from-file=registry-proxy-nginx/proxy.conf
