@@ -7,13 +7,13 @@ metadata:
   annotations:
     cloud.google.com/neg: '{"ingress": true}'
 spec:
-  type: LoadBalancer
-  ports:
-    - port: 80
-      targetPort: 80
-      protocol: TCP
+  type: ClusterIP
   selector:
     app: gar
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
 ---
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
