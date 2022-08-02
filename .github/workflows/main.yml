@@ -12,7 +12,13 @@
 
 name: Build and Deploy to GKE
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "registry-proxy-nginx/**"
+  workflow_dispatch:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT_DEV }}
